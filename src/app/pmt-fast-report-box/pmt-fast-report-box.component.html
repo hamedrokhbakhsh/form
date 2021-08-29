@@ -1,0 +1,31 @@
+<div *ngIf="option" [ngClass]="mainClass()" class="card">
+    <div [ngClass]="bodyClass()" class="card-body border-0">
+        <div class="d-flex">
+            <div class="flex-grow-1 d-flex flex-column align-items-start ">
+                <p class="card-title text-left" *ngIf="option.title"   [ngClass]="titleClass()">{{option.title}}</p>
+                <p class="card-subtitle " *ngIf="option.subtitle" [ngClass]="subtitleClass()">{{option.subtitle}}</p>
+                <p class="card-text" *ngIf="option.text" [ngClass]="textClass()">{{option.text}}</p>
+            </div>
+          <div class="flex-grow-0 d-flex justify-content-center p-2">
+            <div [ngClass]="avatarClass()" class="card__image-section rounded-3 shadow">
+              <div *ngIf="option?.avatar?.image"
+                   [ngStyle]="{'background-image': 'url(' + option?.avatar?.image + ')'}"
+                   class="card__image_setting"></div>
+              <mat-icon *ngIf="!option?.avatar?.image" [style.font-size]="avatarIconSize()"
+                        aria-hidden="false"
+                        aria-label="Example home icon ">{{avatarIcon()}}</mat-icon>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div *ngIf="hasActions()" [ngClass]="actionClass()" class="card-footer">
+        <div class="d-flex justify-content-end">
+            <div *ngFor="let action of option?.actions">
+                <a [ngClass]="action?.class?[action?.class]:['text-dark']" class="card__link" [href]="action?.url">
+                    <span *ngIf="action.title" class="ml-1 mr-1">{{action?.title}}</span>
+                  <mat-icon *ngIf="action?.icon" aria-hidden="false">{{action?.icon}}</mat-icon>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
